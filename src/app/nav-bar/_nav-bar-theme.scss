@@ -1,0 +1,8 @@
+@mixin bar-theming($theme){
+  $primary: map-get($theme, primary);
+  $accent: map-get($theme, accent);
+  
+  .comment {
+    color: mat-color($accent);
+  }
+}

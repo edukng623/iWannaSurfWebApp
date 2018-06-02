@@ -1,0 +1,11 @@
+@mixin footer-theming($theme){
+  $primary: map-get($theme, primary);
+  $accent: map-get($theme, accent);
+  
+  .footer {
+    background-color: mat-color($primary);
+  }
+  #at {
+    color: mat-color($accent);
+  }
+}

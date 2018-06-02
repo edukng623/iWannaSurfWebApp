@@ -1,0 +1,16 @@
+.example-card {
+  max-width: 400px;
+}
+
+.example-header-image {
+  background-image: url('https://www.lego.com/r/www/r/catalogs/-/media/catalogs/characters/lbm%20characters/primary/70900_1to1_batman_360_480.png?l.r=1668006940');
+  background-size: cover;
+}
+
+mat-card {
+  border-radius: 5px;
+}
+mat-icon {
+  margin: 5px;
+  font-size: 20px;
+}

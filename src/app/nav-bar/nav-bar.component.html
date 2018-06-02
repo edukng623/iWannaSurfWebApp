@@ -1,0 +1,41 @@
+<nav class="fixed-header">
+  
+  <mat-toolbar color="primary" >
+    <mat-toolbar-row >
+      <button mat-button routerLink="/home">
+        <mat-icon  class="app-logo fab fa-angular" aria-hidden="true"></mat-icon>
+        <span class="comment">{{'{'}}</span>{{currentPath}}<span class="comment">{{'}'}}</span> 
+      </button>
+
+      <span class="example-spacer"></span>
+      <button *ngIf="showLoginButton" mat-button routerLink="/login">
+            Sign In
+            <mat-icon class="example-icon fas fa-sign-in-alt" aria-hidden="true"></mat-icon>
+          </button>
+      <div *ngIf="true" fxShow="true" fxHide.lt-sm="true"> 
+        <!-- this.user -->
+          <button mat-button routerLink="/dashboard"> 
+            Dashboard
+            <mat-icon  class="example-icon fas fa-chalkboard" aria-hidden="true"></mat-icon>
+          </button>
+        </div>
+        <div *ngIf="true" fxShow="true" fxHide.lt-md="true">
+          <button *ngIf="true" mat-button routerLink="/backoffice"> 
+         
+            Back Office
+            <mat-icon matBadge="15" matBadgeColor="accent" class="example-icon fas fa-briefcase" aria-hidden="true"></mat-icon>
+          </button>
+        </div>
+        <button *ngIf="true" mat-icon-button class="actions" [matMenuTriggerFor]="appMenu">
+          <mat-icon class="fas fa-bars" aria-hidden="true"></mat-icon>
+        </button>  
+        <mat-menu  #appMenu="matMenu">
+          <button routerLink="/dashboard" fxShow="false" fxShow.lt-sm="true" mat-menu-item>Dashboard</button>
+          <button mat-menu-item>Settings</button>
+          <button mat-menu-item>Log Out</button>
+        </mat-menu> 
+    </mat-toolbar-row>
+  </mat-toolbar>
+
+</nav>  
+ 
