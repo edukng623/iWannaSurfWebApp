@@ -1,7 +1,7 @@
 <footer class="footer" >
     <div id="footer-content" >
       
-      <span id="name" class="center center-vartical">{{user.name}}<span  *ngIf="user.admin"  ><span id="at">@</span>Administrator</span></span>
+      <span *ngIf="user" id="name" class="center center-vartical">{{user.name}}<span  *ngIf="user.admin"><span id="at">@</span>Administrator</span></span>
       <span class="center center-vartical">0.1.0</span>
       <!-- <span ><button routerLink="/home" routerLinkActive="true">Not found</button></span> -->
     </div>

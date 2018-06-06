@@ -1,26 +1,26 @@
-import { NgModule }       from '@angular/core';
-import { BrowserModule }  from '@angular/platform-browser';
-import { FormsModule, ReactiveFormsModule }    from '@angular/forms';
-import { HttpClientModule }    from '@angular/common/http';
+import { NgModule } from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 
 import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
 
-import { AppRoutingModule }     from './app-routing.module';
-import { AppComponent }         from './app.component';
+import { AppRoutingModule } from './app-routing.module';
+import { AppComponent } from './app.component';
 
 import { AngularMatImportsModule } from './angular-mat-imports/angular-mat-imports.module';
 import { NavBarComponent } from './nav-bar/nav-bar.component';
 import { DashBoardComponent } from './dash-board/dash-board.component';
-import { FlexLayoutModule } from "@angular/flex-layout";
+import { FlexLayoutModule } from '@angular/flex-layout';
 import { BackOfficeComponent } from './back-office/back-office.component';
 import { LogInComponent } from './log-in/log-in.component';
 import { SurfService } from './surf.service';
-import { NotFoundComponent } from './not-found/not-found.component'; 
-import { SurfGuard } from './surf.guard';
+import { NotFoundComponent } from './not-found/not-found.component';
+import { SurfGuard, LogInGuard } from './surf.guard';
 import { SurfAdminGuard } from './surf-admin.guard';
 import { MessageBusService } from './services/message-bus.service';
 import { HomeComponent } from './home/home.component';
-import { NavFooterComponent } from './nav-footer/nav-footer.component'; 
+import { NavFooterComponent } from './nav-footer/nav-footer.component';
 
 @NgModule({
   imports: [
@@ -30,7 +30,7 @@ import { NavFooterComponent } from './nav-footer/nav-footer.component';
     AngularMatImportsModule,
     AppRoutingModule,
     FlexLayoutModule ,
-    ReactiveFormsModule 
+    ReactiveFormsModule
   ],
   declarations: [
     AppComponent,
@@ -40,11 +40,10 @@ import { NavFooterComponent } from './nav-footer/nav-footer.component';
     LogInComponent,
     NotFoundComponent,
     HomeComponent,
-    NavFooterComponent 
-    
+    NavFooterComponent
   ],
   bootstrap: [ AppComponent ],
-  providers: [SurfService, SurfGuard, MessageBusService, SurfAdminGuard]
+  providers: [SurfService, SurfGuard, MessageBusService, SurfAdminGuard, LogInGuard]
 })
 export class AppModule { }
 

@@ -6,9 +6,9 @@
         <mat-icon  class="app-logo fab fa-angular" aria-hidden="true"></mat-icon>
         <span class="comment">{{'{'}}</span>{{currentPath}}<span class="comment">{{'}'}}</span> 
       </button>
-
+       <mat-progress-bar *ngIf="intensiveIo" mode="indeterminate" color="accent"></mat-progress-bar>
       <span class="example-spacer"></span>
-      <button *ngIf="showLoginButton" mat-button routerLink="/login">
+      <button *ngIf="showLoginButton && !loggedIn" mat-button routerLink="/login">
             Sign In
             <mat-icon class="example-icon fas fa-sign-in-alt" aria-hidden="true"></mat-icon>
           </button>
@@ -32,7 +32,7 @@
         <mat-menu  #appMenu="matMenu">
           <button routerLink="/dashboard" fxShow="false" fxShow.lt-sm="true" mat-menu-item>Dashboard</button>
           <button mat-menu-item>Settings</button>
-          <button mat-menu-item>Log Out</button>
+          <button mat-menu-item (click)="logout()">Log Out</button>
         </mat-menu> 
     </mat-toolbar-row>
   </mat-toolbar>

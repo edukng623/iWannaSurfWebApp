@@ -1,13 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-
+import { MessageBusService } from '../services/message-bus.service';
 @Component({
-  selector: 'dash-board',
+  selector: 'app-dash-board',
   templateUrl: './dash-board.component.html',
   styleUrls: ['./dash-board.component.css']
 })
 export class DashBoardComponent implements OnInit {
 
-  constructor() { }
+  constructor(private messageBusService: MessageBusService ) { }
 
   ngOnInit() {
   }

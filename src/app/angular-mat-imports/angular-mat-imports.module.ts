@@ -8,10 +8,11 @@ import {MatIconModule} from '@angular/material/icon';
 import {MatSidenavModule} from '@angular/material/sidenav';
 import {MatCardModule} from '@angular/material/card';
 import {MatButtonModule} from '@angular/material/button';
-import {MatTabsModule} from '@angular/material/tabs'; 
+import {MatTabsModule} from '@angular/material/tabs';
 import {MatFormFieldModule} from '@angular/material/form-field';
-import {  MatInputModule } from '@angular/material/input'; 
+import {  MatInputModule } from '@angular/material/input';
 import {MatBadgeModule} from '@angular/material/badge';
+import {MatSnackBarModule} from '@angular/material';
 
 @NgModule({
   imports: [
@@ -27,10 +28,11 @@ import {MatBadgeModule} from '@angular/material/badge';
     MatFormFieldModule ,
     MatInputModule,
     MatBadgeModule,
-    MatProgressBarModule
+    MatProgressBarModule,
+    MatSnackBarModule
   ],
   exports: [
-    BrowserAnimationsModule, 
+    BrowserAnimationsModule,
     MatToolbarModule,
     MatMenuModule,
     MatIconModule,
@@ -38,10 +40,11 @@ import {MatBadgeModule} from '@angular/material/badge';
     MatCardModule,
     MatButtonModule,
     MatTabsModule,
-    MatFormFieldModule, 
+    MatFormFieldModule,
     MatInputModule,
     MatBadgeModule,
-    MatProgressBarModule
+    MatProgressBarModule,
+    MatSnackBarModule
   ],
   declarations: []
 })

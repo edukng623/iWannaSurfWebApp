@@ -1,36 +1,9 @@
-.card{
-  margin:  10% auto;
-  margin-bottom: 0px;
+.content {
+  margin: 15px 0px;
 }
-
-.main-div{
-  display: flex;
-  justify-content: center;
-  align-items: center;
+#messages {
+  max-width: 50%;
 }
-
-.tabs {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.just-center {
-  margin: 20px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-.login-content {
-  width: 100%;
-  justify-content: center;
-  align-items: center;
-}
-.tab-move {
-  overflow-y: hidden !important;
-  overflow-x: hidden !important;
-}
-
 .error {
   color: red;
 }

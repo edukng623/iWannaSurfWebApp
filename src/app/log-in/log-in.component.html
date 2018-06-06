@@ -1,78 +1,77 @@
 <div class="center">
 	<h1>Sign In</h1>
-  
 </div>
-<div *ngIf="logInError"class="center well">
-	<h3 class="error" >{{logInError}}</h3>
-</div>
-<mat-progress-bar *ngIf="logging" mode="indeterminate"> Logging In</mat-progress-bar>
-<div class="main-div">
-  
-	<mat-card class="card">
-		<mat-card-content class="important">
 
-			<mat-tab-group #tabGroup class="demo-tab-group tabs" (selectedTabChange)="tabChanged(tabGroup.selectedIndex)" >
-				<mat-tab>
+<div class="center">
+	<mat-card>
+		<mat-card-content>
+			<mat-tab-group #tabGroup (selectedTabChange)="tabChanged(tabGroup.selectedIndex)">
+				<mat-tab class="center">
 					<ng-template mat-tab-label>
-						<mat-icon class="example-icon" aria-hidden="true">how_to_reg</mat-icon>
+						<mat-icon aria-hidden="true">how_to_reg</mat-icon>
 					</ng-template>
-					<div class="just-center tab-move">
-             
-						<div class="login-content">
+					<div class="content">
+						<div class="center">
 							<mat-form-field appearance="outline">
 								<mat-label>Enter your user name</mat-label>
 								<input (keyup)="login.check()" matInput placeholder="Placeholder" [formControl]="login.nameValidator" required>
 								<mat-icon matSuffix>account_circle</mat-icon>
 								<mat-error *ngIf="login.nameValidator.invalid">{{login.nameError()}}</mat-error>
-							</mat-form-field> 
-							<div class="login-content">
-								<mat-form-field appearance="outline">
-									<input (keyup)="login.check()"  matInput required placeholder="Enter your password"  [formControl]="login.passwordValidator"
-                  [type]="login.hidePw ? 'password' : 'text'" >
-									<mat-error *ngIf="login.passwordValidator.invalid">{{login.passwordError()}}</mat-error>
-									<mat-icon matSuffix (click)="login.hidePw = !login.hidePw">{{login.hidePw ? 'visibility' : 'visibility_off'}}</mat-icon> 
-								</mat-form-field>
-							</div>
-						</div> 
+							</mat-form-field>
+						</div>
+						<div class="center">
+							<mat-form-field appearance="outline">
+								<input (keyup)="login.check()" matInput required placeholder="Enter your password" [formControl]="login.passwordValidator"
+								 [type]="login.hidePw ? 'password' : 'text'">
+								<mat-error *ngIf="login.passwordValidator.invalid">{{login.passwordError()}}</mat-error>
+								<mat-icon matSuffix (click)="login.hidePw = !login.hidePw">{{login.hidePw ? 'visibility' : 'visibility_off'}}</mat-icon>
+							</mat-form-field>
+						</div>
 					</div>
+
 				</mat-tab>
 				<mat-tab>
 					<ng-template mat-tab-label>
 						<mat-icon class="example-icon" aria-hidden="true">person_add</mat-icon>
 					</ng-template>
-					<div class="just-center tab-move">
-						<div class="login-content">
+					<div class="content">
+						<div class="center">
 							<mat-form-field>
 								<mat-label>Enter your user name</mat-label>
 								<input (keyup)="register.check()" [value]="register.username" matInput [formControl]="register.nameValidator" required>
 								<mat-icon matSuffix>account_circle</mat-icon>
 								<mat-error *ngIf="register.nameValidator.invalid">{{register.nameError()}}</mat-error>
 							</mat-form-field>
-							<div class="login-content">
-								<mat-form-field>
-									<input matInput required placeholder="Enter your password" [value]="register.password" [type]="register.hidePw ? 'password' : 'text'" 
-                  [formControl]="register.passwordValidator" (keyup)="register.check()">
-									<mat-error *ngIf="register.passwordValidator.invalid">{{register.passwordError()}}</mat-error>
-									<mat-icon matSuffix (click)="register.hidePw = !register.hidePw">{{register.hidePw ? 'visibility' : 'visibility_off'}}</mat-icon>
-								</mat-form-field>
-							</div>
-							<div class="login-content">
-								<mat-form-field>
-									<input matInput required placeholder="Repeat your password" [value]="register.repeatPassword" [type]="register.hidePw ? 'password' : 'text'" 
-                  [formControl]="register.repeatValidator" (keyup)="register.check()">
-									<mat-error *ngIf="register.repeatValidator.invalid || !register.equal">{{register.repeatError()}}</mat-error>
-									<mat-icon matSuffix (click)="register.hidePw = !register.hidePw">{{register.hidePw ? 'visibility' : 'visibility_off'}}</mat-icon>
-								</mat-form-field>
-							</div>
 						</div>
+						<div class="center">
+							<mat-form-field>
+								<input matInput required placeholder="Enter your password" [value]="register.password" [type]="register.hidePw ? 'password' : 'text'"
+								 [formControl]="register.passwordValidator" (keyup)="register.check();" >
+								<mat-error *ngIf="register.passwordValidator.invalid">{{register.passwordError()}}</mat-error>
+								<mat-icon matSuffix (click)="register.hidePw = !register.hidePw">{{register.hidePw ? 'visibility' : 'visibility_off'}}</mat-icon>
+							</mat-form-field>
+						</div>
+						<div class="center">
+							<mat-form-field>
+								<input matInput required placeholder="Repeat your password" [value]="register.repeatPassword" [type]="register.hidePw ? 'password' : 'text'"
+								 [formControl]="register.repeatValidator" (keyup)="register.check();"  >
+								<mat-error *ngIf="register.repeatValidator.invalid || !register.equal">{{register.repeatError()}}</mat-error>
+								<mat-icon matSuffix (click)="register.hidePw = !register.hidePw">{{register.hidePw ? 'visibility' : 'visibility_off'}}</mat-icon>
+							</mat-form-field>
+						</div>
+
 					</div>
 				</mat-tab>
 			</mat-tab-group>
 		</mat-card-content>
 		<mat-card-actions>
-			<button mat-button *ngIf="login.active && login.valid" color="primary" (click)="signIn()">Login <mat-icon>arrow_forward_ios</mat-icon></button>
-			<button mat-button *ngIf="register.active && register.valid" color="primary">Register <mat-icon>create</mat-icon></button>
+			<button mat-button *ngIf="login.active && login.valid" color="primary" (click)="signIn()">Login
+				<mat-icon>arrow_forward_ios</mat-icon>
+			</button>
+			<button mat-button *ngIf="register.active && register.valid" color="primary">Register
+				<mat-icon>create</mat-icon>
+			</button>
 		</mat-card-actions>
 	</mat-card>
-  
+
 </div>
