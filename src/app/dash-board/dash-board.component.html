@@ -1,3 +1,106 @@
-<p>
-dash-board works!
-</p>
+<div class="main">
+
+	<div id="search-options" class="center">
+
+		<form (submit)="searchSpot(spot.value)">
+			<mat-form-field appearance="outline" id="search-field">
+				<mat-label>Search available surfing spots</mat-label>
+				<input name="spot" #spot matInput placeholder="Spot name">
+				<mat-icon (click)="searchSpot(spot.value)" id="search-icon" matSuffix>search</mat-icon>
+			</mat-form-field>
+			<button type="submit" style="display: none;">Search</button>
+		</form>
+		<button mat-fab class="fab">
+			<i class="fas fa-plus"></i>
+		</button>
+	</div>
+	<div id="result" *ngIf="showList" [@fadeAnimation]="showList ? 'show': ''">
+		<mat-expansion-panel *ngFor="let spot of spots" [expanded]="false" hideToggle="true">
+			<mat-expansion-panel-header>
+				<mat-panel-title>
+					{{spot.dbSpot.identification.name}}
+				</mat-panel-title>
+			</mat-expansion-panel-header>
+
+			<mat-tab-group>
+				<mat-tab label="Swell">
+					<div class="spot-info">
+						<div class="center cat-header">
+							<span>Height</span>
+						</div>
+						<div class="cat-detail">
+							<div style="display: flex;">
+								<span style="float: left;">Min: {{spot.dbSpot.swell.height.min}}</span>
+								<hr>
+								<span style="float: right;">
+									<span class="cat-max">Max: </span> {{spot.dbSpot.swell.height.max}}</span>
+							</div>
+						</div>
+					</div>
+					<div class="spot-info">
+						<div class="center cat-header">
+							<span>Period</span>
+						</div>
+						<div class="cat-detail">
+							<div style="display: flex;">
+								<span style="float: left;">Min: {{spot.dbSpot.swell.period.min}}</span>
+								<hr>
+								<span style="float: right;">
+									<span class="cat-max">Max: </span> {{spot.dbSpot.swell.period.max}}</span>
+							</div>
+						</div>
+					</div>
+					<div class="spot-info">
+						<div class="center cat-header">
+							<span>Direction</span>
+						</div>
+						<div class="cat-detail">
+							<div style="display: flex;">
+								<span style="float: left;">Min: {{spot.dbSpot.swell.direction.min}}</span>
+								<hr>
+								<span style="float: right;">
+									<span class="cat-max">Max: </span> {{spot.dbSpot.swell.direction.max}}</span>
+							</div>
+						</div>
+					</div>
+				</mat-tab>
+				<mat-tab label="Wind">
+					<div class="spot-info">
+						<div class="center cat-header">
+							<span>Speed</span>
+						</div>
+						<div class="cat-detail">
+							<div style="display: flex;">
+								<span style="float: left;">Min: {{spot.dbSpot.wind.speed.min}}</span>
+								<hr>
+								<span style="float: right;">
+									<span class="cat-max">Max: </span> {{spot.dbSpot.wind.speed.max}}</span>
+							</div>
+						</div>
+					</div>
+					<div class="spot-info">
+						<div class="center cat-header">
+							<span>Direction</span>
+						</div>
+						<div class="cat-detail">
+							<div style="display: flex;">
+								<span style="float: left;">Min: {{spot.dbSpot.wind.direction.min}}</span>
+								<hr>
+								<span style="float: right;">
+									<span class="cat-max">Max: </span> {{spot.dbSpot.wind.direction.max}}</span>
+							</div>
+						</div>
+					</div>
+				</mat-tab>
+			</mat-tab-group>
+
+			<mat-action-row>
+				<button mat-button color="warn" (click)="prevStep()">Edit</button>
+				<button mat-button color="primary" (click)="nextStep()">Thumbs Up</button>
+			</mat-action-row>
+		</mat-expansion-panel>
+
+	</div>
+
+
+</div>

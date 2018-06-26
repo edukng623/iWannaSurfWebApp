@@ -10,10 +10,10 @@ import {MatCardModule} from '@angular/material/card';
 import {MatButtonModule} from '@angular/material/button';
 import {MatTabsModule} from '@angular/material/tabs';
 import {MatFormFieldModule} from '@angular/material/form-field';
-import {  MatInputModule } from '@angular/material/input';
+import { MatInputModule } from '@angular/material/input';
 import {MatBadgeModule} from '@angular/material/badge';
-import {MatSnackBarModule} from '@angular/material';
-
+import {MatExpansionModule} from '@angular/material/expansion';
+import { MatSnackBarModule } from '@angular/material';
 @NgModule({
   imports: [
     CommonModule,
@@ -29,6 +29,7 @@ import {MatSnackBarModule} from '@angular/material';
     MatInputModule,
     MatBadgeModule,
     MatProgressBarModule,
+    MatExpansionModule,
     MatSnackBarModule
   ],
   exports: [
@@ -44,6 +45,7 @@ import {MatSnackBarModule} from '@angular/material';
     MatInputModule,
     MatBadgeModule,
     MatProgressBarModule,
+    MatExpansionModule,
     MatSnackBarModule
   ],
   declarations: []

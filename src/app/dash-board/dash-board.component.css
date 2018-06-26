@@ -1,0 +1,37 @@
+.space {
+    padding: 10px;
+  }
+  
+  #search-icon {
+    cursor: pointer;
+    cursor: hand;
+  }
+  .spot-info {
+    border-radius: 5px;
+    margin: 15px;
+    padding: 8px;
+    color: white;
+  }
+  
+  .cat-header > span {
+    font-size: 18px;
+  }
+  .cat-detail {
+    padding: 5px 15px;
+  }
+  
+  .list {
+    width: 80%;
+  }
+
+.box {
+    position:relative;
+}
+.fab {
+  margin-left: 15px;
+}
+
+.main {
+  height: 100%;
+  width: 100%;
+}

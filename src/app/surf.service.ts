@@ -1,14 +1,27 @@
 import { Injectable } from '@angular/core';
 import { User } from './classes/user';
 import { MessageBusService } from './services/message-bus.service';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { tap } from 'rxjs/operators';
+import { Headers, RequestOptions } from '@angular/http';
+import { Observable } from 'rxjs/Observable';
+
+
+const API_PATH: String = 'http://localhost:3000';
+
 @Injectable()
 export class SurfService {
 
   private user: User;
 
-  constructor(private busService: MessageBusService) { }
+  constructor(private busService: MessageBusService, private http: HttpClient ) {
 
-  logIn(name: String, pw: String) {
+  }
+
+  searchSpot(spot: string): Observable<any> {
+    return this.http.get(API_PATH + `/api/spots/search?name=${spot}`);
+  }
+  mockLogIn(name: String, pw: String) {
     return new Promise((res, rej) => {
       // rej(`User ${name} does not exist`);
       setTimeout(() => {
@@ -19,8 +32,23 @@ export class SurfService {
         this.user = this.testingUser(name);
         this.notifyLogin();
         res(this.user);
-      }, 2000);
+      }, 500);
     });
+  }
+
+  logIn(name: String, pw: String) {
+
+    // this.http.post(`${API_PATH}/api/users/login`, {username: name, password: pw}, { headers: new HttpHeaders()})
+    //   .pipe(
+    //     tap(
+    //       data => console.log(data),
+    //       error => console.error(error)
+    //     )
+    //   ).subscribe( user => {
+    //     localStorage.setItem('user', JSON.stringify({user}));
+    //   });
+
+    return this.mockLogIn(name, pw);
   }
 
   notifyLogin() {

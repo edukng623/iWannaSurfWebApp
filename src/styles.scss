@@ -14,9 +14,11 @@ $theme: mat-light-theme($primary, $accent);
 
 @import 'app/nav-bar/_nav-bar-theme.scss';
 @import 'app/nav-footer/_nav-footer-theme.scss';
+@import 'app/dash-board/_dash-board-theme.scss';
 
 @include bar-theming($theme);
 @include footer-theming($theme);
+@include dash-theming($theme);
 
 h1 {
   color: #369;

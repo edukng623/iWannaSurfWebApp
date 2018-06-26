@@ -33,12 +33,15 @@ export class LogInComponent implements OnInit {
     this.busService.notify('io-start', {message: 'Logging in..'});
     this.surfService.logIn(user.username, user.password).then(_ => {
       this.busService.notify('io-end', {});
+      this.snackBar.open(`Welcome ${user.username}!`, 'Logged In', {
+        duration: 2000
+      });
       this.router.navigate(['home']);
     })
       .catch(err => {
         this.busService.notify('io-end', {});
         this.snackBar.open(err, 'Error', {
-          duration: 2000,
+          duration: 2000
         });
       });
   }
@@ -48,3 +51,4 @@ export class LogInComponent implements OnInit {
 
   }
 }
+

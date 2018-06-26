@@ -6,13 +6,13 @@
         <mat-icon  class="app-logo fab fa-angular" aria-hidden="true"></mat-icon>
         <span class="comment">{{'{'}}</span>{{currentPath}}<span class="comment">{{'}'}}</span> 
       </button>
-       <mat-progress-bar *ngIf="intensiveIo" mode="indeterminate" color="accent"></mat-progress-bar>
-      <span class="example-spacer"></span>
+      
+      <span class="example-spacer"><mat-progress-bar *ngIf="intensiveIo" mode="indeterminate" color="accent"></mat-progress-bar> </span>
       <button *ngIf="showLoginButton && !loggedIn" mat-button routerLink="/login">
             Sign In
             <mat-icon class="example-icon fas fa-sign-in-alt" aria-hidden="true"></mat-icon>
           </button>
-      <div *ngIf="true" fxShow="true" fxHide.lt-sm="true"> 
+      <div *ngIf="loggedIn" fxShow="true" fxHide.lt-sm="true"> 
         <!-- this.user -->
           <button mat-button routerLink="/dashboard"> 
             Dashboard
@@ -20,8 +20,7 @@
           </button>
         </div>
         <div *ngIf="true" fxShow="true" fxHide.lt-md="true">
-          <button *ngIf="true" mat-button routerLink="/backoffice"> 
-         
+          <button *ngIf="loggedIn" mat-button routerLink="/backoffice"> 
             Back Office
             <mat-icon matBadge="15" matBadgeColor="accent" class="example-icon fas fa-briefcase" aria-hidden="true"></mat-icon>
           </button>

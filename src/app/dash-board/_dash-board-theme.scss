@@ -1,0 +1,13 @@
+@mixin dash-theming($theme){
+    $primary: map-get($theme, primary);
+    $accent: map-get($theme, accent);
+    
+    .spot-info {
+      background-color: mat-color($primary);
+    }
+    hr {
+      background-color: mat-color($accent);
+      
+    }
+    
+  } 
