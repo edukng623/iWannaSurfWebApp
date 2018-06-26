@@ -21,6 +21,7 @@ import { SurfAdminGuard } from './surf-admin.guard';
 import { MessageBusService } from './services/message-bus.service';
 import { HomeComponent } from './home/home.component';
 import { NavFooterComponent } from './nav-footer/nav-footer.component';
+import { SpotEditComponent } from './spot-edit/spot-edit.component';
 
 @NgModule({
   imports: [
@@ -40,7 +41,8 @@ import { NavFooterComponent } from './nav-footer/nav-footer.component';
     LogInComponent,
     NotFoundComponent,
     HomeComponent,
-    NavFooterComponent
+    NavFooterComponent,
+    SpotEditComponent
   ],
   bootstrap: [ AppComponent ],
   providers: [SurfService, SurfGuard, MessageBusService, SurfAdminGuard, LogInGuard]

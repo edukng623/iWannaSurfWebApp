@@ -11,10 +11,10 @@ export class SurfGuard implements CanActivate {
   canActivate(
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
-    if (!this.surfService.isAuthenticated()) {
-      this.router.navigate(['login']);
-      return false;
-    }
+    // if (!this.surfService.isAuthenticated()) {
+    //   this.router.navigate(['login']);
+    //   return false;
+    // }
     return true;
   }
 }
@@ -27,10 +27,10 @@ export class LogInGuard implements CanActivate {
   canActivate(
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
-    if (this.surfService.isAuthenticated()) {
-      this.router.navigate(['home']);
-      return false;
-    }
+    // if (this.surfService.isAuthenticated()) {
+    //   this.router.navigate(['home']);
+    //   return false;
+    // }
     return true;
   }
 }

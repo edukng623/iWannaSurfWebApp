@@ -8,19 +8,21 @@ import { NotFoundComponent } from './not-found/not-found.component';
 import { SurfGuard, LogInGuard } from './surf.guard';
 import { SurfAdminGuard } from './surf-admin.guard';
 import { HomeComponent } from './home/home.component';
+import { SpotEditComponent } from './spot-edit/spot-edit.component';
 
 
 const routes: Routes = [
-  {path: 'dashboard', component: DashBoardComponent, canActivate: [SurfGuard]},
-  {path: 'backoffice', component: BackOfficeComponent, canActivate: [SurfAdminGuard]},
-  {path: 'login', component: LogInComponent, canActivate: [LogInGuard] },
-  {path: 'home', component: HomeComponent },
+  { path: 'dashboard', component: DashBoardComponent, canActivate: [SurfGuard] },
+  { path: 'backoffice', component: BackOfficeComponent, canActivate: [SurfGuard] },
+  { path: 'login', component: LogInComponent, canActivate: [LogInGuard] },
+  { path: 'home', component: HomeComponent },
+  { path: 'spots/edit/:id', component: SpotEditComponent, canActivate: [SurfGuard]},
   { path: '', redirectTo: '/home', pathMatch: 'full' },
-  { path: '**', component: NotFoundComponent}
+  { path: '**', component: NotFoundComponent },
 ];
 
 @NgModule({
-  exports: [ RouterModule ],
-  imports: [ RouterModule.forRoot(routes) ]
+  exports: [RouterModule],
+  imports: [RouterModule.forRoot(routes)]
 })
-export class AppRoutingModule {}
+export class AppRoutingModule { }

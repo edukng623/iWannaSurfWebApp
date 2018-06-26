@@ -17,6 +17,7 @@ export class DashBoardComponent implements OnInit {
 
   ngOnInit() {
   }
+
   searchSpot(spot) {
     this.busService.notify('io-start', {message: `Searching for ${spot}`});
     this.surfService.searchSpot(spot)
@@ -28,6 +29,10 @@ export class DashBoardComponent implements OnInit {
       });
   }
 
+  edit(spotId) {
+    console.log('Editing ' + spotId);
+
+  }
 
 
 }

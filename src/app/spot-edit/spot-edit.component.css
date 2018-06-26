@@ -1,0 +1,45 @@
+.example-icon {
+    padding: 0 14px;
+  }
+  
+  .app-logo{
+    padding: 0 5px;
+  }
+  
+  .example-spacer {
+    flex: 1 1 auto;
+  }
+  #name {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .space {
+    margin: 2px;
+  }
+  
+  button {
+    border: none;
+    font-family: Arial;
+    padding: 5px 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    cursor: hand;
+  }
+  
+  mat-icon {
+    font-size: 20px; 
+  }
+  
+.actions {
+ 
+    border-radius: 5px;
+    /* border: 5px; */
+}
+
+.content {
+    margin-left: 20px;
+    margin-right: 20px; 
+}
+  
+  

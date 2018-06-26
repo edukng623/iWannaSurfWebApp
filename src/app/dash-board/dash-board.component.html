@@ -95,8 +95,7 @@
 			</mat-tab-group>
 
 			<mat-action-row>
-				<button mat-button color="warn" (click)="prevStep()">Edit</button>
-				<button mat-button color="primary" (click)="nextStep()">Thumbs Up</button>
+				<button routerLink="/spots/edit/{{spot.dbSpot._id}}" mat-button color="warn" >Edit</button>
 			</mat-action-row>
 		</mat-expansion-panel>
 

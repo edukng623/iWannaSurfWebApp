@@ -1,0 +1,72 @@
+<div class="content">
+  <div class="actions">
+
+    <mat-toolbar color="white" class="actions">
+      <mat-toolbar-row>
+
+        <button mat-button color="warn">
+          Delete
+          <mat-icon class="example-icon fas fa-trash" aria-hidden="true"></mat-icon>
+        </button>
+        <div>
+
+          <button mat-button color="accent" (click)="update();">
+            Update
+            <mat-icon class="example-icon fas fa-sync" aria-hidden="true"></mat-icon>
+          </button>
+        </div>
+        <span class="example-spacer"></span>
+        <div *ngIf="spot">
+          {{spot.identification.name}}
+        </div>
+      </mat-toolbar-row>
+    </mat-toolbar>
+
+  </div>
+
+  <div class="data">
+    <mat-tab-group *ngIf="spot !== undefined">
+      <mat-tab label="Swell">
+        <mat-accordion>
+          <mat-expansion-panel>
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                Height
+              </mat-panel-title>
+              <mat-panel-description>
+                Intervals for Swell Height
+              </mat-panel-description>
+            </mat-expansion-panel-header>
+            <mat-form-field>
+              <input matInput placeholder="Minimun value"  [(ngModel)]="spot.swell.height.min" >
+            </mat-form-field>
+            <br>
+            <mat-form-field>
+              <input matInput placeholder="Maximum value"  [(ngModel)]="spot.swell.height.max">
+            </mat-form-field>
+          </mat-expansion-panel>
+          <mat-expansion-panel>
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                Period
+              </mat-panel-title>
+              <mat-panel-description>
+                Period Interval for Swell
+              </mat-panel-description>
+            </mat-expansion-panel-header>
+            <mat-form-field>
+              <input matInput placeholder="Minimun value">
+            </mat-form-field>
+            <br>
+            <mat-form-field>
+              <input matInput placeholder="Maximum value">
+            </mat-form-field>
+          </mat-expansion-panel>
+        </mat-accordion>
+      </mat-tab>
+      <mat-tab label="Wind"> Content 2 </mat-tab>
+      <mat-tab label="Identification"> Content 3 </mat-tab>
+      <mat-tab label="More"> Content 3 </mat-tab>
+    </mat-tab-group>
+  </div>
+</div>
