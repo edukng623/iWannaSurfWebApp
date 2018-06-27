@@ -1,7 +1,7 @@
 <div class="content">
   <div class="actions">
 
-    <mat-toolbar color="white" class="actions">
+    <mat-toolbar class="actions">
       <mat-toolbar-row>
 
         <button mat-button color="warn">
@@ -25,10 +25,10 @@
   </div>
 
   <div class="data">
-    <mat-tab-group *ngIf="spot !== undefined">
+    <mat-tab-group *ngIf="spot !== undefined" #group>
       <mat-tab label="Swell">
         <mat-accordion>
-          <mat-expansion-panel>
+          <mat-expansion-panel >
             <mat-expansion-panel-header>
               <mat-panel-title>
                 Height
@@ -37,12 +37,12 @@
                 Intervals for Swell Height
               </mat-panel-description>
             </mat-expansion-panel-header>
-            <mat-form-field>
-              <input matInput placeholder="Minimun value"  [(ngModel)]="spot.swell.height.min" >
+            <mat-form-field class="interval">
+              <input matInput placeholder="Minimun value" [(ngModel)]="spot.swell.height.min">
             </mat-form-field>
-            <br>
-            <mat-form-field>
-              <input matInput placeholder="Maximum value"  [(ngModel)]="spot.swell.height.max">
+
+            <mat-form-field class="interval">
+              <input matInput placeholder="Maximum value" [(ngModel)]="spot.swell.height.max">
             </mat-form-field>
           </mat-expansion-panel>
           <mat-expansion-panel>
@@ -54,19 +54,56 @@
                 Period Interval for Swell
               </mat-panel-description>
             </mat-expansion-panel-header>
-            <mat-form-field>
-              <input matInput placeholder="Minimun value">
+            <mat-form-field class="interval">
+              <input matInput placeholder="Minimun value" [(ngModel)]="spot.swell.period.min">
             </mat-form-field>
-            <br>
-            <mat-form-field>
-              <input matInput placeholder="Maximum value">
+
+            <mat-form-field class="interval">
+              <input matInput placeholder="Maximum value" [(ngModel)]="spot.swell.period.max">
+            </mat-form-field>
+          </mat-expansion-panel>
+          <mat-expansion-panel>
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                Direction
+              </mat-panel-title>
+              <mat-panel-description>
+                Direction Interval for Swell
+              </mat-panel-description>
+            </mat-expansion-panel-header>
+            <mat-form-field class="interval">
+              <input matInput placeholder="Minimun value" [(ngModel)]="spot.swell.direction.min">
+            </mat-form-field>
+
+            <mat-form-field class="interval">
+              <input matInput placeholder="Maximum value" [(ngModel)]="spot.swell.direction.max">
             </mat-form-field>
           </mat-expansion-panel>
         </mat-accordion>
       </mat-tab>
-      <mat-tab label="Wind"> Content 2 </mat-tab>
-      <mat-tab label="Identification"> Content 3 </mat-tab>
+      <mat-tab label="Wind">
+          <mat-accordion >
+            <mat-expansion-panel >
+              <mat-expansion-panel-header >
+                <mat-panel-title>
+                  Direction
+                </mat-panel-title>
+                <mat-panel-description> 
+                  Direction Interval
+                </mat-panel-description>
+              </mat-expansion-panel-header>
+              <mat-form-field>
+                <input matInput placeholder="Minimun value">
+              </mat-form-field>
+              <mat-form-field>
+                <input matInput placeholder="Maximum value">
+              </mat-form-field>
+            </mat-expansion-panel>
+          </mat-accordion>
+      </mat-tab>
+      <mat-tab label="Identification">vent 3 </mat-tab>
       <mat-tab label="More"> Content 3 </mat-tab>
     </mat-tab-group>
   </div>
 </div>
+

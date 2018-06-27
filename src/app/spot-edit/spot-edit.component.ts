@@ -6,10 +6,10 @@ import { tap, map } from 'rxjs/operators';
 @Component({
   selector: 'app-spot-edit',
   templateUrl: './spot-edit.component.html',
-  styleUrls: ['./spot-edit.component.css']
+  styleUrls: ['./spot-edit.component.scss']
 })
 export class SpotEditComponent implements OnInit {
-
+  selectedTabIndex = 0;
   spot = undefined;
   constructor( private route: ActivatedRoute, private surfService: SurfService) {
     this.getSpot();

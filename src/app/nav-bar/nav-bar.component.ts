@@ -45,6 +45,7 @@ export class NavBarComponent implements OnInit {
 
   logout() {
     this.messageBusService.notify('io-start', {});
+
     this.surfService.logout().then( _ => {
       console.log('Logout ended');
       this.router.navigate(['home']);

@@ -14,6 +14,8 @@ import { MatInputModule } from '@angular/material/input';
 import {MatBadgeModule} from '@angular/material/badge';
 import {MatExpansionModule} from '@angular/material/expansion';
 import { MatSnackBarModule } from '@angular/material';
+import {MatGridListModule} from '@angular/material/grid-list';
+
 @NgModule({
   imports: [
     CommonModule,
@@ -30,7 +32,8 @@ import { MatSnackBarModule } from '@angular/material';
     MatBadgeModule,
     MatProgressBarModule,
     MatExpansionModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    MatGridListModule
   ],
   exports: [
     BrowserAnimationsModule,
@@ -46,7 +49,8 @@ import { MatSnackBarModule } from '@angular/material';
     MatBadgeModule,
     MatProgressBarModule,
     MatExpansionModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    MatGridListModule
   ],
   declarations: []
 })
