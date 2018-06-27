@@ -15,6 +15,9 @@ import {MatBadgeModule} from '@angular/material/badge';
 import {MatExpansionModule} from '@angular/material/expansion';
 import { MatSnackBarModule } from '@angular/material';
 import {MatGridListModule} from '@angular/material/grid-list';
+import {MatListModule} from '@angular/material/list';
+import {MatDividerModule} from '@angular/material/divider';
+import {MatSelectModule} from '@angular/material/select';
 
 @NgModule({
   imports: [
@@ -33,7 +36,10 @@ import {MatGridListModule} from '@angular/material/grid-list';
     MatProgressBarModule,
     MatExpansionModule,
     MatSnackBarModule,
-    MatGridListModule
+    MatGridListModule,
+    MatListModule,
+    MatDividerModule,
+    MatSelectModule
   ],
   exports: [
     BrowserAnimationsModule,
@@ -50,7 +56,10 @@ import {MatGridListModule} from '@angular/material/grid-list';
     MatProgressBarModule,
     MatExpansionModule,
     MatSnackBarModule,
-    MatGridListModule
+    MatGridListModule,
+    MatListModule,
+    MatDividerModule,
+    MatSelectModule
   ],
   declarations: []
 })

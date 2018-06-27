@@ -28,7 +28,7 @@
     <mat-tab-group *ngIf="spot !== undefined" #group>
       <mat-tab label="Swell">
         <mat-accordion>
-          <mat-expansion-panel >
+          <mat-expansion-panel>
             <mat-expansion-panel-header>
               <mat-panel-title>
                 Height
@@ -82,28 +82,112 @@
         </mat-accordion>
       </mat-tab>
       <mat-tab label="Wind">
-          <mat-accordion >
+        <!-- <mat-accordion >
             <mat-expansion-panel >
               <mat-expansion-panel-header >
                 <mat-panel-title>
                   Direction
                 </mat-panel-title>
                 <mat-panel-description> 
-                  Direction Interval
+                  Direction Interval for Wind
                 </mat-panel-description>
               </mat-expansion-panel-header>
               <mat-form-field>
-                <input matInput placeholder="Minimun value">
+                <input matInput placeholder="Minimun value" [(ngModel)]="spot.wind.direction.min">
               </mat-form-field>
               <mat-form-field>
-                <input matInput placeholder="Maximum value">
+                <input matInput placeholder="Maximum value" [(ngModel)]="spot.wind.direction.max">
               </mat-form-field>
             </mat-expansion-panel>
-          </mat-accordion>
+            <mat-expansion-panel >
+                <mat-expansion-panel-header >
+                  <mat-panel-title>
+                    Speed
+                  </mat-panel-title>
+                  <mat-panel-description> 
+                    Wind Speed Interval
+                  </mat-panel-description>
+                </mat-expansion-panel-header>
+                <mat-form-field class="interval">
+                  <input matInput placeholder="Minimun value" [(ngModel)]="spot.wind.speed.min">
+                </mat-form-field>
+                <mat-form-field class="interval">
+                  <input matInput placeholder="Maximum value" [(ngModel)]="spot.wind.speed.max">
+                </mat-form-field>
+              </mat-expansion-panel>
+          </mat-accordion> -->
+        <mat-list>
+          <mat-list-item>Speed</mat-list-item>
+          <mat-form-field class="interval">
+            <input matInput placeholder="Minimun value" [(ngModel)]="spot.wind.speed.min">
+          </mat-form-field>
+          <mat-form-field class="interval">
+            <input matInput placeholder="Maximum value" [(ngModel)]="spot.wind.speed.max">
+          </mat-form-field>
+          <mat-divider></mat-divider>
+          <mat-list-item>Direction</mat-list-item>
+          <mat-form-field class="interval">
+            <input matInput placeholder="Minimun value" [(ngModel)]="spot.wind.direction.min">
+          </mat-form-field>
+          <mat-form-field class="interval">
+            <input matInput placeholder="Maximum value" [(ngModel)]="spot.wind.direction.max">
+          </mat-form-field>
+        </mat-list>
       </mat-tab>
-      <mat-tab label="Identification">vent 3 </mat-tab>
-      <mat-tab label="More"> Content 3 </mat-tab>
+      <mat-tab label="Identification">
+        <mat-form-field class="interval">
+          <input matInput placeholder="Name" [(ngModel)]="spot.identification.name">
+        </mat-form-field>
+        <mat-form-field class="interval">
+          <input matInput placeholder="Latitude" [(ngModel)]="spot.identification.lat">
+        </mat-form-field>
+        <mat-form-field class="interval">
+          <input matInput placeholder="Longitude" [(ngModel)]="spot.identification.lon">
+        </mat-form-field>
+      </mat-tab>
+      <mat-tab label="More">
+        <!-- <mat-card class="example-card">
+          <mat-card-header>
+            <div mat-card-avatar class="example-header-image"></div>
+            <mat-card-title>Shiba Inu</mat-card-title>
+            <mat-card-subtitle>Dog Breed</mat-card-subtitle>
+          </mat-card-header>
+
+          <mat-card-content>
+            <p>
+              The Shiba Inu is the smallest of the six original and distinct spitz breeds of dog from Japan. A small, agile dog that copes
+              very well with mountainous terrain, the Shiba Inu was originally bred for hunting.
+            </p>
+          </mat-card-content>
+          <mat-card-actions>
+            <button mat-button>LIKE</button>
+            <button mat-button>SHARE</button>
+          </mat-card-actions>
+        </mat-card> -->
+        <mat-card class="example-card">
+          <mat-card-header>
+            <div mat-card-avatar class="example-header-image"></div>
+            <mat-card-title>Crowd WeekDays</mat-card-title>
+            <mat-card-subtitle>Estimated crowd during week days</mat-card-subtitle>
+          </mat-card-header>
+          <mat-form-field>
+            <mat-select [(value)]="spot.additionalInfo.crowd.weekDays">
+              <mat-option value="1">Empty</mat-option>
+              <mat-option value="2">Not Crowded</mat-option>
+              <mat-option value="3">Some Crowd</mat-option>
+              <mat-option value="4">Crowded</mat-option>
+              <mat-option value="5">Extremely Crowded</mat-option>
+            </mat-select>
+          </mat-form-field>
+          <mat-card-content>
+            <p>
+              The Shiba Inu is the smallest of the six original and distinct spitz breeds of dog from Japan. A small, agile dog that copes
+              very well with mountainous terrain, the Shiba Inu was originally bred for hunting.
+            </p>
+          </mat-card-content>
+
+        </mat-card>
+      </mat-tab>
     </mat-tab-group>
   </div>
 </div>
-
