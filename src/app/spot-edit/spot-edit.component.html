@@ -2,11 +2,17 @@
   <div class="actions">
 
     <mat-toolbar class="actions">
-      <mat-toolbar-row>
+        <mat-toolbar-row *ngIf="create">
+            <button mat-button color="primary" (click)="createSpot()">
+                Create
+                <mat-icon class="example-icon fas fa-plus" aria-hidden="true"></mat-icon>
+              </button>
+        </mat-toolbar-row>
+      <mat-toolbar-row *ngIf="!create">
 
         <button mat-button color="warn">
           Delete
-          <mat-icon class="example-icon fas fa-trash" aria-hidden="true"></mat-icon>
+          <mat-icon class="example-icon fas fa-trash" aria-hidden="true" (click)="delete()"></mat-icon>
         </button>
         <div>
 
@@ -25,7 +31,7 @@
   </div>
 
   <div class="data">
-    <mat-tab-group *ngIf="spot !== undefined" #group>
+    <mat-tab-group *ngIf="spot !== undefined " #group>
       <mat-tab label="Swell">
         <mat-accordion>
           <mat-expansion-panel>
@@ -135,15 +141,30 @@
         </mat-list>
       </mat-tab>
       <mat-tab label="Identification">
-        <mat-form-field class="interval">
-          <input matInput placeholder="Name" [(ngModel)]="spot.identification.name">
-        </mat-form-field>
-        <mat-form-field class="interval">
-          <input matInput placeholder="Latitude" [(ngModel)]="spot.identification.lat">
-        </mat-form-field>
-        <mat-form-field class="interval">
-          <input matInput placeholder="Longitude" [(ngModel)]="spot.identification.lon">
-        </mat-form-field>
+        <div class="identification-content">
+          <mat-card class="example-card">
+            <mat-card-header>
+              <div mat-card-avatar class="header-map"></div>
+              <mat-card-title>Place Identification</mat-card-title>
+              <mat-card-subtitle>Identification for API use only</mat-card-subtitle>
+            </mat-card-header>
+
+            <mat-card-content>
+
+              <mat-form-field class="interval">
+                <input matInput placeholder="Name" [(ngModel)]="spot.identification.name">
+              </mat-form-field>
+              <mat-form-field class="interval">
+                <input matInput placeholder="Latitude" [(ngModel)]="spot.identification.lat">
+              </mat-form-field>
+              <mat-form-field class="interval">
+                <input matInput placeholder="Longitude" [(ngModel)]="spot.identification.lon">
+              </mat-form-field>
+
+            </mat-card-content>
+
+          </mat-card>
+        </div>
       </mat-tab>
       <mat-tab label="More">
         <!-- <mat-card class="example-card">
@@ -164,29 +185,88 @@
             <button mat-button>SHARE</button>
           </mat-card-actions>
         </mat-card> -->
-        <mat-card class="example-card">
-          <mat-card-header>
-            <div mat-card-avatar class="example-header-image"></div>
-            <mat-card-title>Crowd WeekDays</mat-card-title>
-            <mat-card-subtitle>Estimated crowd during week days</mat-card-subtitle>
-          </mat-card-header>
-          <mat-form-field>
-            <mat-select [(value)]="spot.additionalInfo.crowd.weekDays">
-              <mat-option value="1">Empty</mat-option>
-              <mat-option value="2">Not Crowded</mat-option>
-              <mat-option value="3">Some Crowd</mat-option>
-              <mat-option value="4">Crowded</mat-option>
-              <mat-option value="5">Extremely Crowded</mat-option>
-            </mat-select>
-          </mat-form-field>
-          <mat-card-content>
-            <p>
-              The Shiba Inu is the smallest of the six original and distinct spitz breeds of dog from Japan. A small, agile dog that copes
-              very well with mountainous terrain, the Shiba Inu was originally bred for hunting.
-            </p>
-          </mat-card-content>
+        <div fxLayout="row" fxLayoutAlign="center center" class="row-example">
+          <div class="identification-content">
+            <mat-card class="example-card">
+              <mat-card-header>
+                <div mat-card-avatar class="header-map"></div>
+                <mat-card-title>Place location</mat-card-title>
+                <mat-card-subtitle>Real location for this spot, used for navigation and rank</mat-card-subtitle>
+              </mat-card-header>
 
-        </mat-card>
+              <mat-card-content>
+
+                <mat-form-field>
+                  <input matInput placeholder="Latitude" [(ngModel)]="spot.additionalInfo.realLat">
+                </mat-form-field>
+                <mat-form-field>
+                  <input matInput placeholder="Longitude" [(ngModel)]="spot.additionalInfo.realLon">
+                </mat-form-field>
+                <mat-form-field>
+                  <mat-select placeholder="Rank" [(value)]="spot.additionalInfo.rank">
+                    <mat-option value="1">1</mat-option>
+                    <mat-option value="2">2</mat-option>
+                    <mat-option value="3">3 </mat-option>
+                    <mat-option value="4">4</mat-option>
+                    <mat-option value="5">5</mat-option>
+                  </mat-select>
+                </mat-form-field>
+
+              </mat-card-content>
+
+            </mat-card>
+          </div>
+        </div>
+        <div fxLayout="row" fxLayoutAlign="center center" class="row-example">
+          <div class="identification-content">
+            <mat-card class="example-card">
+              <mat-card-header>
+                <div mat-card-avatar class="example-header-image"></div>
+                <mat-card-title>Crowd WeekDays</mat-card-title>
+                <mat-card-subtitle>Estimated crowd during week days</mat-card-subtitle>
+              </mat-card-header>
+              <mat-form-field>
+                <mat-select [(value)]="spot.additionalInfo.crowd.weekDays">
+                  <mat-option value="1">Empty</mat-option>
+                  <mat-option value="2">Not Crowded</mat-option>
+                  <mat-option value="3">Some Crowd</mat-option>
+                  <mat-option value="4">Crowded</mat-option>
+                  <mat-option value="5">Extremely Crowded</mat-option>
+                </mat-select>
+              </mat-form-field>
+              <mat-card-content>
+                <p>
+                  Careful as this is only an estimation!!
+                </p>
+              </mat-card-content>
+
+            </mat-card>
+          </div>
+          <div class="identification-content">
+            <mat-card class="example-card">
+              <mat-card-header>
+                <div mat-card-avatar class="example-header-image"></div>
+                <mat-card-title>Crowd WeekEnds</mat-card-title>
+                <mat-card-subtitle>Estimated crowd during week ends</mat-card-subtitle>
+              </mat-card-header>
+              <mat-form-field>
+                <mat-select [(value)]="spot.additionalInfo.crowd.weekEnds">
+                  <mat-option value="1">Empty</mat-option>
+                  <mat-option value="2">Not Crowded</mat-option>
+                  <mat-option value="3">Some Crowd</mat-option>
+                  <mat-option value="4">Crowded</mat-option>
+                  <mat-option value="5">Extremely Crowded</mat-option>
+                </mat-select>
+              </mat-form-field>
+              <mat-card-content>
+                <p>
+                  Careful as this is only an estimation!!
+                </p>
+              </mat-card-content>
+
+            </mat-card>
+          </div>
+        </div>
       </mat-tab>
     </mat-tab-group>
   </div>

@@ -25,6 +25,18 @@ export class SurfService {
   getSpotById(id: string): Observable<any> {
     return this.http.get(API_PATH + `/api/spots/get?id=${id}`);
   }
+
+  createSpot(spot): Observable<any> {
+    return this.http.post(API_PATH + `/api/spot`, spot);
+  }
+
+  updateSpot(spot): Observable<any> {
+    return this.http.put(API_PATH + `/api/spot`, spot);
+  }
+
+  deleteSpot(id): Observable<any> {
+    return this.http.delete(API_PATH + `/api/spot?id=${id}`);
+  }
   mockLogIn(name: String, pw: String) {
     return new Promise((res, rej) => {
       // rej(`User ${name} does not exist`);

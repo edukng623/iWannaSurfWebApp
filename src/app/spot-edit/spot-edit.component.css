@@ -42,3 +42,15 @@
   background-image: url('/assets/surfer.png');
   background-size: cover;
 }
+
+.identification-content {
+  margin: 15px;
+}
+
+mat-form-field {
+  margin: 5px;
+}
+.header-map {
+  background-image: url('/assets/map.png');
+  background-size: cover;
+}
