@@ -22,7 +22,7 @@
         <div *ngIf="true" fxShow="true" fxHide.lt-md="true">
           <button *ngIf="loggedIn" mat-button routerLink="/backoffice"> 
             Back Office
-            <mat-icon matBadge="15" matBadgeColor="accent" class="example-icon fas fa-briefcase" aria-hidden="true"></mat-icon>
+            <mat-icon matBadge="{{notifications}}" matBadgeColor="accent" class="example-icon fas fa-briefcase" aria-hidden="true"></mat-icon>
           </button>
         </div>
         <button *ngIf="true" mat-icon-button class="actions" [matMenuTriggerFor]="appMenu">

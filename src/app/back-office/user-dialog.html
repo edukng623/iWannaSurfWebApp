@@ -1,0 +1,9 @@
+<h1 mat-dialog-title>User {{data.username}} was successfully created</h1>
+<div mat-dialog-content>
+    <p>Password: {{data.password}}</p>
+</div>
+<div mat-dialog-actions>
+    <button mat-button (click)="copyPassword()" ngxClipboard [cbContent]="data.password"cdkFocusInitial>
+        <mat-icon class="example-icon fas fa-copy" aria-hidden="true"></mat-icon>Copy</button>
+    <button mat-button [mat-dialog-close]="data" (click)="onOk()">Close</button>
+</div>

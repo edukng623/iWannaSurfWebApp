@@ -18,7 +18,7 @@ export class Crowd {
 export class SpotEditComponent implements OnInit {
   create = false;
   spot = undefined;
-
+  following: Boolean = false;
   crowds: Crowd[] = [
     {
       value: '5',
@@ -44,7 +44,37 @@ export class SpotEditComponent implements OnInit {
 
   ngOnInit() {
   }
-
+  unsubscribe() {
+    this.surfService.unsubscribeSpot(this.spot._id)
+      .pipe( tap( _ => console.log('Unsubscribed' + this.spot._id)) )
+      .subscribe(_ => {
+        this.snackBar.open('Unsubscribed ', this.spot._id, {
+          duration: 2000
+        });
+      }, err => {
+        this.snackBar.open('Error unsubscribing ', this.spot._id, {
+          duration: 2000
+        });
+      });
+  }
+  subscribe() {
+    this.surfService.subscribeSpot(this.spot._id)
+      .pipe( tap( _ => console.log('Subscribed ' + this.spot._id)) )
+      .subscribe( _ => {
+        this.snackBar.open('Subscribed ', this.spot._id, {
+          duration: 2000
+        });
+      }, err => {
+        this.snackBar.open('Error subscribing ', this.spot._id, {
+          duration: 2000
+        });
+      });
+  }
+  checkFollowing() {
+    if (this.surfService.user) {
+      this.following = this.surfService.user.subscriptions.find( sub => sub === this.spot._id ) && true || false;
+    }
+  }
   getSpot() {
     const id = this.route.snapshot.paramMap.get('id');
     if (id === 'new') {
@@ -56,6 +86,9 @@ export class SpotEditComponent implements OnInit {
       // .pipe(map(spot => JSON.parse(spot)))
       .subscribe(spot => {
         this.spot = spot;
+        this.surfService.userPoll.subscribe( user => {
+          this.checkFollowing();
+        });
         console.log('Spot is ' + spot.identification);
       });
   }

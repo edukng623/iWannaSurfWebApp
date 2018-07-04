@@ -1,3 +1,142 @@
-<p>
-back-office works!
-</p>
+<div class="main">
+	<mat-tab-group>
+		<mat-tab label="Notifications">
+
+			<div class=" user-item" *ngFor="let notification of notifications">
+				<mat-card *ngIf="notification.opened">
+					<mat-card-header>
+						<div mat-card-avatar>
+							<!-- <mat-icon class="example-icon" aria-hidden="true">person_add</mat-icon> -->
+							<mat-icon class="example-icon fas fa-exclamation-circle" aria-hidden="true"></mat-icon>
+							<!-- <mat-icon  *ngIf="!notification.opened"class="example-icon fas fa-check-circle" aria-hidden="true"></mat-icon> -->
+						</div>
+						<mat-card-title class="can-click" routerLink="/spots/edit/{{notification.spot}}">{{notification.spot}}</mat-card-title>
+						<mat-card-subtitle color="warn">Opened</mat-card-subtitle>
+						<!-- <mat-card-subtitle *ngIf="!notification.opened" color="primary">Closed</mat-card-subtitle> -->
+					</mat-card-header>
+
+					<mat-card-content>
+						<p>{{notification.description}}</p>
+					</mat-card-content>
+					<mat-card-actions>
+						<button (click)="closeNotification(notification._id)" mat-button color="primary">
+							<mat-icon class="example-icon fas fa-check" aria-hidden="true"></mat-icon>Close</button>
+					</mat-card-actions>
+				</mat-card>
+			</div>
+
+
+		</mat-tab>
+		<mat-tab label="User Management">
+			<div fxLayout="row" fxLayoutAlign="center center" class="row-example">
+				<div class="user-item">
+					<mat-card class="example-card">
+						<mat-card-header>
+							<div mat-card-avatar>
+								<mat-icon class="example-icon" aria-hidden="true">person_add</mat-icon>
+							</div>
+							<mat-card-title>Add</mat-card-title>
+							<mat-card-subtitle>Create User</mat-card-subtitle>
+						</mat-card-header>
+
+						<mat-card-content>
+							<div class="login-content">
+								<mat-form-field>
+									<mat-label>Enter new user name</mat-label>
+									<input matInput required [formControl]="nameValidator">
+									<mat-icon matSuffix>account_circle</mat-icon>
+									<mat-error *ngIf="nameValidator.invalid">{{nameError()}}</mat-error>
+								</mat-form-field>
+								<br>
+								<mat-form-field>
+									<mat-label>User email</mat-label>
+									<input matInput required [formControl]="emailValidator">
+									<mat-icon matSuffix>email</mat-icon>
+									<mat-error *ngIf="emailValidator.invalid">{{emailError()}}</mat-error>
+								</mat-form-field>
+								<br>
+								<mat-checkbox #cbGenpw [(ngModel)]="genPw">Generate password</mat-checkbox>
+								<mat-checkbox [(ngModel)]="user.admin">Administrator ?</mat-checkbox>
+								<br>
+								<mat-form-field *ngIf="!cbGenpw.checked">
+									<input matInput required placeholder="Enter the password" [formControl]="passwordValidator" [type]="hidePw ? 'password' : 'text'">
+									<mat-error *ngIf="passwordValidator.invalid">{{passwordValidator.hasError('minlength') ? 'Password must be at least 8 characters': ''}}</mat-error>
+									<mat-icon matSuffix (click)="hidePw = !hidePw">{{hidePw ? 'visibility' : 'visibility_off'}}</mat-icon>
+								</mat-form-field>
+							</div>
+						</mat-card-content>
+						<mat-card-actions *ngIf="!emailValidator.errors && !nameValidator.errors && (cbGenpw.checked || !passwordValidator.errors)">
+							<button mat-button (click)="createUser()" color="primary">CREATE</button>
+						</mat-card-actions>
+					</mat-card>
+				</div>
+				<div class="user-item">
+					<mat-card class="example-card">
+						<mat-card-header>
+							<div mat-card-avatar>
+								<mat-icon class="example-icon" aria-hidden="true">list</mat-icon>
+							</div>
+							<mat-card-title>Users</mat-card-title>
+							<mat-card-subtitle>Current Users</mat-card-subtitle>
+						</mat-card-header>
+
+						<mat-card-content>
+							<div class="login-content">
+								<form (submit)="searchUser(user.value)">
+									<mat-form-field id="search-field">
+										<mat-label>Search for users</mat-label>
+										<input #user matInput placeholder="User name">
+										<mat-icon (click)="searchUser(user.value)" id="search-icon" matSuffix>search</mat-icon>
+									</mat-form-field>
+									<button type="submit" style="display: none;">Search</button>
+								</form>
+								<mat-selection-list #usersToDelete [formControl]="usersControl">
+									<mat-list-option *ngFor="let user of users" [value]="user._id">
+										{{user.username}}
+									</mat-list-option>
+								</mat-selection-list>
+							</div>
+						</mat-card-content>
+						<mat-card-actions>
+							<button (click)="deleteUsers()" *ngIf="usersToDelete.selectedOptions.selected.length > 0" mat-button color="warn">DELETE</button>
+
+						</mat-card-actions>
+					</mat-card>
+				</div>
+			</div>
+		</mat-tab>
+		<mat-tab label="Subscriptions">
+
+			<div class=" user-item" >
+				<mat-card class="example-card">
+					<mat-card-header>
+						<div mat-card-avatar>
+							<mat-icon class="example-icon" aria-hidden="true">notifications_active</mat-icon>
+						</div>
+						<mat-card-title>Notifications</mat-card-title>
+						<mat-card-subtitle>Your currently active Spot notifications</mat-card-subtitle>
+					</mat-card-header>
+
+					<mat-card-content>
+						<div class="login-content">
+							<mat-selection-list #subsToDelete [formControl]="subsControl" >
+								<mat-list-option *ngFor="let sub of subscriptions" [value]="sub.subscription">
+									{{sub.spot.identification.name}}
+								</mat-list-option>
+							</mat-selection-list>
+						</div>
+					</mat-card-content>
+					<mat-card-actions>
+						<button (click)="deleteSubscriptions()" *ngIf="subsToDelete.selectedOptions.selected.length > 0" mat-button color="warn">Unsubscribe</button>
+
+					</mat-card-actions>
+				</mat-card>
+			</div>
+
+
+		</mat-tab>
+	</mat-tab-group>
+	<button mat-fab class="fab" (click)="refreshNotifications()">
+		<i class="fas fa-sync-alt"></i>
+	</button>
+</div>

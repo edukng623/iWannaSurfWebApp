@@ -17,21 +17,17 @@ export class NavBarComponent implements OnInit {
   currentPath: String = '';
   intensiveIo: Boolean = false;
 
+  notifications: Number = 0;
   constructor(private surfService: SurfService, private router: Router, public activatedRoute: ActivatedRoute,
   private messageBusService: MessageBusService ) {
 
-    router.events.pipe(
-      filter(event => event instanceof NavigationEnd)
-    ).subscribe((event: NavigationEnd) => {
-        this.currentPath = event.url.slice(1);
-        this.showLoginButton = !(this.currentPath === 'login');
-    });
+    this.initRouterEvents();
 
     this.messageBusService.on('search', (str) => {
       console.log(`Searching for ${str}.`);
       this.intensiveIo = true;
     });
-    this.messageBusService.on('login', args => this.loggedIn = true);
+    this.messageBusService.on('login', (args) => this.onLogin(args));
     this.messageBusService.on('logout', args => this.loggedIn = false);
     this.messageBusService.on('io-start', args => {
       console.log(args.message);
@@ -41,8 +37,16 @@ export class NavBarComponent implements OnInit {
     this.messageBusService.on('io-end', args => {
       this.intensiveIo = false;
     });
-   }
 
+   }
+   onLogin(args) {
+    this.loggedIn = true;
+    this.surfService.userPoll.subscribe( user => {
+      // console.log( user.notifications);
+      this.notifications = user.notifications && user.notifications.filter( n => n.opened ).length
+                              || 0;
+    });
+   }
   logout() {
     this.messageBusService.notify('io-start', {});
 
@@ -55,7 +59,14 @@ export class NavBarComponent implements OnInit {
       this.messageBusService.notify('io-end', {});
     });
   }
-
+  initRouterEvents() {
+    this.router.events.pipe(
+      filter(event => event instanceof NavigationEnd)
+    ).subscribe((event: NavigationEnd) => {
+        this.currentPath = event.url.slice(1);
+        this.showLoginButton = !(this.currentPath === 'login');
+    });
+  }
   ngOnInit() {
 
   }

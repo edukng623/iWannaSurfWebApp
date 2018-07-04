@@ -21,6 +21,20 @@
             <mat-icon class="example-icon fas fa-sync" aria-hidden="true"></mat-icon>
           </button>
         </div>
+        <div *ngIf="!following">
+
+          <button mat-button color="primary" (click)="subscribe();">
+            Follow
+            <mat-icon class="example-icon fas fa-bell" aria-hidden="true"></mat-icon>
+          </button>
+        </div>
+        <div *ngIf="following">
+
+          <button mat-button color="primary" (click)="unsubscribe();">
+            Unfollow
+            <mat-icon class="example-icon far fa-bell" aria-hidden="true"></mat-icon>
+          </button>
+        </div>
         <span class="example-spacer"></span>
         <div *ngIf="spot">
           {{spot.identification.name}}

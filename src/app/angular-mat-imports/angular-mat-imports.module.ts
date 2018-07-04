@@ -18,6 +18,8 @@ import {MatGridListModule} from '@angular/material/grid-list';
 import {MatListModule} from '@angular/material/list';
 import {MatDividerModule} from '@angular/material/divider';
 import {MatSelectModule} from '@angular/material/select';
+import {MatCheckboxModule} from '@angular/material/checkbox';
+import {MatDialogModule} from '@angular/material/dialog';
 
 @NgModule({
   imports: [
@@ -39,7 +41,9 @@ import {MatSelectModule} from '@angular/material/select';
     MatGridListModule,
     MatListModule,
     MatDividerModule,
-    MatSelectModule
+    MatSelectModule,
+    MatCheckboxModule,
+    MatDialogModule
   ],
   exports: [
     BrowserAnimationsModule,
@@ -59,7 +63,9 @@ import {MatSelectModule} from '@angular/material/select';
     MatGridListModule,
     MatListModule,
     MatDividerModule,
-    MatSelectModule
+    MatSelectModule,
+    MatCheckboxModule,
+    MatDialogModule
   ],
   declarations: []
 })
