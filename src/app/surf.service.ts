@@ -2,33 +2,36 @@ import { Injectable } from '@angular/core';
 import { User } from './classes/user';
 import { MessageBusService } from './services/message-bus.service';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { tap, switchMap, take } from 'rxjs/operators';
+import { tap, switchMap, take, takeUntil } from 'rxjs/operators';
 import { Headers, RequestOptions } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import { interval, timer } from 'rxjs';
 
 
-const API_PATH: String = 'http://localhost:3000';
+// const API_PATH: String = 'http://localhost:3000';
+const API_PATH: String = '';
 
 @Injectable()
 export class SurfService {
-
+  public logout$;
   public user: User;
 
   private startPolling: Boolean = false;
   private endPolling: Boolean = false;
 
   public userPoll: Observable<any>;
+
+
   constructor(private busService: MessageBusService, private http: HttpClient ) {
 
   }
 
   searchSpot(spot: string): Observable<any> {
-    return this.http.get(API_PATH + `/api/spots/search?name=${spot}`);
+    return this.http.get(API_PATH + `/api/spots?q=${spot}`);
   }
 
   getSpotById(id: string): Observable<any> {
-    return this.http.get(API_PATH + `/api/spots/get?id=${id}`);
+    return this.http.get(API_PATH + `/api/spot/${id}`);
   }
 
   createSpot(spot): Observable<any> {
@@ -48,7 +51,7 @@ export class SurfService {
   }
 
   deleteUsers(users) {
-    return this.http.post(API_PATH + `/api/delete/users`, users);
+    return this.http.post(API_PATH + `/api/users/delete`, users);
   }
   searchUser(name) {
     return this.http.get(API_PATH + `/api/user/search?name=${name}`);
@@ -59,16 +62,20 @@ export class SurfService {
   }
   subscribeSpot(id) {
     this.user.subscriptions.push(id);
+    delete this.user.password;
     return this.http.put(API_PATH + `/api/user`, this.user);
   }
   closeNotification(id) {
-    return this.http.put(API_PATH + `/api/notification/${id}/close`, {});
+    return this.http.put(API_PATH + `/api/notification/${id}/opened`, {});
   }
   unsubscribeSpot(id) {
     this.user.subscriptions.splice(this.user.subscriptions.indexOf(id), 1);
+    delete this.user.password;
     return this.http.put(API_PATH + `/api/user`, this.user);
   }
-
+  updateUserPassword() {
+    return this.http.put(API_PATH + `/api/user/password`, this.user);
+  }
   batchUnsubscription(ids) {
     ids.forEach( id => this.user.subscriptions.splice(this.user.subscriptions.indexOf(id), 1));
     return this.http.put(API_PATH + `/api/user`, this.user);
@@ -107,7 +114,8 @@ export class SurfService {
   }
   enablePoll() {
     this.userPoll = timer(0, 2000)
-    // .pipe( take(1) )
+    // .pipe( take(1) )~
+    .pipe( takeUntil( this.logout$ ))
     .pipe(
       switchMap( () => this.getUserById(this.user._id))
     ).pipe(
@@ -125,13 +133,10 @@ export class SurfService {
   }
 
   logout() {
-    return new Promise((res, rej) => {
-      setTimeout( () => {
-        this.user = undefined;
-        this.busService.notify('logout', {});
-        res();
-      }, 2000);
-    });
+    return this.http.post(API_PATH + '/api/user/logout', {})
+      // .pipe( tap( _ => this.userPoll = timer(0, 20000).pipe( take(0))))
+      .pipe( tap( _ => this.user = undefined ))
+      .pipe( tap( _ => this.busService.notify('logout', {})));
   }
 
   testingUser(name) {

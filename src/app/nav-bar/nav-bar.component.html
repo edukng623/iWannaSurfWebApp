@@ -25,13 +25,13 @@
             <mat-icon matBadge="{{notifications}}" matBadgeColor="accent" class="example-icon fas fa-briefcase" aria-hidden="true"></mat-icon>
           </button>
         </div>
-        <button *ngIf="true" mat-icon-button class="actions" [matMenuTriggerFor]="appMenu">
+        <button  mat-icon-button class="actions" [matMenuTriggerFor]="appMenu">
           <mat-icon class="fas fa-bars" aria-hidden="true"></mat-icon>
         </button>  
-        <mat-menu  #appMenu="matMenu">
+        <mat-menu  #appMenu="matMenu" >
           <button routerLink="/dashboard" fxShow="false" fxShow.lt-sm="true" mat-menu-item>Dashboard</button>
-          <button mat-menu-item>Settings</button>
-          <button mat-menu-item (click)="logout()">Log Out</button>
+          <button mat-menu-item routerLink="/settings">Settings</button>
+          <button mat-menu-item #logoutButton (click)="logout()">Log Out</button>
         </mat-menu> 
     </mat-toolbar-row>
   </mat-toolbar>

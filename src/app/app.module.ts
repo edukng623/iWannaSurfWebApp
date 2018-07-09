@@ -24,6 +24,7 @@ import { NavFooterComponent } from './nav-footer/nav-footer.component';
 import { SpotEditComponent } from './spot-edit/spot-edit.component';
 import { DialogUserComponent } from './back-office/back-office.component';
 import { ClipboardModule } from 'ngx-clipboard';
+import { SettingsComponent } from './settings/settings.component';
 @NgModule({
   imports: [
     BrowserModule,
@@ -45,7 +46,8 @@ import { ClipboardModule } from 'ngx-clipboard';
     HomeComponent,
     NavFooterComponent,
     SpotEditComponent,
-    DialogUserComponent
+    DialogUserComponent,
+    SettingsComponent
   ],
   entryComponents: [DialogUserComponent, BackOfficeComponent],
   bootstrap: [ AppComponent ],

@@ -39,7 +39,7 @@ export class LogInComponent implements OnInit {
       this.router.navigate(['home']);
     }, err => {
       this.busService.notify('io-end', {});
-        this.snackBar.open(err.message, 'Error', {
+        this.snackBar.open(err.error.message, 'Error', {
           duration: 2000
         });
     });

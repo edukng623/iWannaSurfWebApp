@@ -4,6 +4,7 @@ import { SurfService } from '../surf.service';
 import { MatSnackBar } from '@angular/material';
 import { tap, take } from 'rxjs/operators';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
+import { MessageBusService } from '../services/message-bus.service';
 
 
 export interface DialogData {
@@ -21,8 +22,12 @@ export class BackOfficeComponent implements OnInit {
   passwordValidator: FormControl = new FormControl('', [Validators.required, Validators.minLength(8)]);
   emailValidator: FormControl = new FormControl('', [Validators.email]);
 
+  isAdmin: Boolean = false;
+
   usersControl = new FormControl();
   subsControl = new FormControl();
+  adminControl = new FormControl();
+
   hidePw = true;
   genPw = false;
   user = {
@@ -36,8 +41,10 @@ export class BackOfficeComponent implements OnInit {
   notifications = [];
   subscriptions = [];
 
-  constructor(private surfService: SurfService, private snackBar: MatSnackBar, public dialog: MatDialog) {
+  constructor(private surfService: SurfService, private snackBar: MatSnackBar, public dialog: MatDialog
+  , private busService: MessageBusService) {
     this.refreshNotifications();
+    this.isAdmin = this.surfService.user.admin;
   }
 
   ngOnInit() {
@@ -49,12 +56,15 @@ export class BackOfficeComponent implements OnInit {
     }, err => console.log(err));
   }
   closeNotification(id) {
+    this.busService.notify('io-start', {});
     this.surfService.closeNotification(id).subscribe( _ => {
+      this.busService.notify('io-end', {});
       this.refreshNotifications();
       this.snackBar.open('Closed', id, {
         duration: 2000
       });
     }, err => {
+      this.busService.notify('io-end', {});
       this.snackBar.open('Error close', id, {
         duration: 2000
       });
@@ -62,23 +72,29 @@ export class BackOfficeComponent implements OnInit {
   }
   deleteSubscriptions() {
     console.log(this.subsControl.value);
-
+    this.busService.notify('io-start', {});
     this.surfService.batchUnsubscription(this.subsControl.value).subscribe( _ => {
+      this.busService.notify('io-end', {});
       this.refreshNotifications();
       this.snackBar.open('Unsubscriptions Done', 'Subscriptions', {
         duration: 2000
       });
     }, err => {
+      this.busService.notify('io-end', {});
       this.snackBar.open(err, 'Subscriptions', {
         duration: 2000
       });
     });
   }
   searchUser(name) {
+    this.busService.notify('io-start', {});
     this.surfService.searchUser(name).pipe( tap( users => console.log(users)) )
       .subscribe( users => {
-        this.users = users;
+        this.busService.notify('io-end', {});
+        this.users = users['filter']( user => user._id !== this.surfService.user._id);
+
       }, err => {
+        this.busService.notify('io-end', {});
         this.snackBar.open(err, 'Error', {
           duration: 2000
         });
@@ -86,12 +102,15 @@ export class BackOfficeComponent implements OnInit {
   }
 
   deleteUsers() {
+    this.busService.notify('io-start', {});
     this.surfService.deleteUsers(this.usersControl.value).subscribe( _ => {
-      this.snackBar.open('Users Delete', 'User', {
+      this.busService.notify('io-end', {});
+      this.snackBar.open('Users Deleted', 'User', {
         duration: 2000
       });
       this.users = undefined;
     }, err => {
+      this.busService.notify('io-end', {});
       this.snackBar.open(err, 'User', {
         duration: 2000
       });
@@ -101,14 +120,18 @@ export class BackOfficeComponent implements OnInit {
     this.user.username = this.nameValidator.value;
     this.user.password = this.genPw ? this.randomPassword() : this.passwordValidator.value;
     this.user.email = this.emailValidator.value;
-
+    this.user.admin = this.adminControl.value;
+    console.log('Creating user');
     console.log(this.user);
+    this.busService.notify('io-start', {});
     this.surfService.createUser(this.user).subscribe( _ => {
+      this.busService.notify('io-end', {});
       this.snackBar.open('Created User and sent mail to ' + this.user.email, this.user.username, {
         duration: 8000
       });
       this.clear();
     }, err => {
+      this.busService.notify('io-end', {});
       this.snackBar.open(err, 'Error', {
         duration: 2000
       });

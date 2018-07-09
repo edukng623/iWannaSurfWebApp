@@ -1,0 +1,34 @@
+<div>
+	<mat-accordion>
+		<mat-expansion-panel>
+			<mat-expansion-panel-header>
+				<mat-panel-title>
+					User Settings
+				</mat-panel-title>
+				<mat-panel-description>
+					Manage your user data
+					<mat-icon class="icon fas fa-user-cog" aria-hidden="true"></mat-icon>
+				</mat-panel-description>
+			</mat-expansion-panel-header>
+			<mat-form-field>
+				<input matInput [formControl]="passwordValidator" [type]="hidePw ? 'password' : 'text'" placeholder="Change password">
+				<mat-icon matSuffix (click)="hidePw = !hidePw">{{hidePw ? 'visibility' : 'visibility_off'}}</mat-icon>
+			</mat-form-field>
+			<button (click)="changePassword()" mat-button matSuffix aria-label="Update">
+				<mat-icon>sync</mat-icon>
+			</button>
+		</mat-expansion-panel>
+		<mat-expansion-panel>
+			<mat-expansion-panel-header>
+				<mat-panel-title>
+					Application Settings
+				</mat-panel-title>
+				<mat-panel-description>
+					Change Backend Settings (Administrators only)
+					<mat-icon class="icon fas fa-server" aria-hidden="true"></mat-icon>
+				</mat-panel-description>
+			</mat-expansion-panel-header>
+
+		</mat-expansion-panel>
+	</mat-accordion>
+</div>

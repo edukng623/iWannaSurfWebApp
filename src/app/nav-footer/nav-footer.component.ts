@@ -10,7 +10,9 @@ import { MessageBusService } from '../services/message-bus.service';
 export class NavFooterComponent implements OnInit {
   user: User;
   constructor(private busService: MessageBusService) {
-    this.busService.on('login', args => this.user = args.user);
+    this.busService.on('login', args => {
+      this.user = args.user;
+    });
     this.busService.on('logout', args => this.user = undefined);
   }
 

@@ -1,10 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router, NavigationEnd, ActivatedRoute } from '@angular/router';
 import { filter } from 'rxjs/operators';
 import { User } from '../classes/user';
 import { LogInComponent } from '../log-in/log-in.component';
 import { SurfService } from '../surf.service';
 import { MessageBusService } from '../services/message-bus.service';
+import {MatButton} from '@angular/material/button';
+import {Observable} from 'rxjs/Observable';
+import 'rxjs/add/observable/fromEvent';
 @Component({
   selector: 'app-nav-bar',
   templateUrl: './nav-bar.component.html',
@@ -12,6 +15,9 @@ import { MessageBusService } from '../services/message-bus.service';
 })
 export class NavBarComponent implements OnInit {
   // user: User;
+  @ViewChild('logoutButton') logoutButton: MatButton;
+  // logout$: Observable<any>;
+
   showLoginButton: Boolean = true;
   loggedIn: Boolean = false;
   currentPath: String = '';
@@ -50,11 +56,11 @@ export class NavBarComponent implements OnInit {
   logout() {
     this.messageBusService.notify('io-start', {});
 
-    this.surfService.logout().then( _ => {
+    this.surfService.logout().subscribe( _ => {
       console.log('Logout ended');
       this.router.navigate(['home']);
       this.messageBusService.notify('io-end', {});
-    }).catch( err => {
+    }, err => {
       console.log('Logout ended with err: ' + err);
       this.messageBusService.notify('io-end', {});
     });
@@ -70,5 +76,8 @@ export class NavBarComponent implements OnInit {
   ngOnInit() {
 
   }
-
+  // tslint:disable-next-line:use-life-cycle-interface
+  ngAfterViewInit() {
+    this.surfService.logout$ = Observable.fromEvent(this.logoutButton._elementRef.nativeElement, 'click');
+  }
 }
